@@ -40,4 +40,14 @@ public class StudentController {
     public List<Student> getWhenAgeBetween(@RequestParam Integer min, @RequestParam Integer max) {
         return studentService.getWhenAgeBetween(min, max);
     }
+
+    @GetMapping("/names-starting-with-a")
+    public List<String> getAllNamesStartingWithA() {
+        return studentService.getAllNamesStartingWithA();
+    }
+
+    @GetMapping("/avg-age-with-stream")
+    public double getAvgAgeWithStream() {
+        return studentService.getAvgAgeWithStream();
+    }
 }
