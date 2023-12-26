@@ -33,4 +33,9 @@ public class FacultyController {
     public Faculty delete(@RequestParam long id) {
         return facultyService.delete(id);
     }
+
+    @GetMapping("/longest-name")
+    public String getLongestName() {
+        return facultyService.getLongestName();
+    }
 }
