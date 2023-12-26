@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import pro.sky.hw35.model.Faculty;
 import pro.sky.hw35.repository.FacultyRepository;
 
+import java.util.stream.Collectors;
+
 @Service
 public class FacultyService {
 
@@ -42,5 +44,12 @@ public class FacultyService {
         Faculty facultyForDelete = facultyRepository.findById(id).get();
         facultyRepository.deleteById(id);
         return facultyForDelete;
+    }
+
+    public String getLongestName() {
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .sorted((name1,name2) -> name2.length() - name1.length())
+                .toList().getFirst();
     }
 }

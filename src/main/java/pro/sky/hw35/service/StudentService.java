@@ -10,6 +10,7 @@ import pro.sky.hw35.model.Student;
 import pro.sky.hw35.repository.StudentRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -67,5 +68,21 @@ public class StudentService {
     public List<LastFiveStudentsById> getLastFiveStudents() {
         logger.info("Was invoked method for get last five students");
         return studentRepository.lastFiveStudentsById();
+    }
+
+    public List<String> getAllNamesStartingWithA() {
+        String firstSymbol = "А";
+        return studentRepository.findAll().stream()
+                .map(student -> student.getName().toUpperCase())
+                .filter(name -> name.startsWith(firstSymbol))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public double getAvgAgeWithStream() {
+        return studentRepository.findAll().stream()
+                .mapToDouble(Student::getAge)
+                .average()
+                .orElse(-1);
     }
 }
